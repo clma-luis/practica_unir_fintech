@@ -45,6 +45,7 @@ if __name__ == "__main__":
     print(f"Ordenando en modo {order}")
 
     file_path = os.path.join(".", filename)
+
     if os.path.isfile(file_path):
         word_list = []
         with open(file_path, "r") as file:
