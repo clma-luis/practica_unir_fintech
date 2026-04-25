@@ -26,15 +26,24 @@ if __name__ == "__main__":
     remove_duplicates = DEFAULT_DUPLICATES
     ascending = True
 
-    if len(sys.argv) == 4:
+    if len(sys.argv) >= 3:
         filename = sys.argv[1]
         remove_duplicates = sys.argv[2].lower() == "yes"
-        ascending = sys.argv[3].lower() != "desc"
+
+        # Nuevo parámetro opcional para orden
+        if len(sys.argv) == 4:
+            if sys.argv[3].lower() == "desc":
+                ascending = False
+            else:
+                ascending = True
     else:
-        print("Uso: python script.py <fichero> <yes/no duplicados> <asc/desc>")
+        print("Uso: python main.py <file> <remove_duplicates yes/no> <asc/desc>")
         sys.exit(1)
 
-    print(f"Se leerán las palabras del fichero {filename}")
+    print(f"Leyendo las palabras del fichero {filename}")
+    order = "ascendente" if ascending else "descendente"
+    print(f"Ordenando en modo {order}")
+
     file_path = os.path.join(".", filename)
 
     if os.path.isfile(file_path):
@@ -49,4 +58,4 @@ if __name__ == "__main__":
     if remove_duplicates:
         word_list = remove_duplicates_from_list(word_list)
 
-    print(sort_list(word_list, ascending=ascending))
+    print(sort_list(word_list, ascending))
